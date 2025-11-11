@@ -75,12 +75,16 @@ Di seguito sono riportati esempi di output dei video stabilizzati utilizzando i 
     <tr>
         <td align="center">FPS (Filtro Cutoff 0.01)</td>
         <td align="center">FPS (Filtro Gaussiano 0.018)</td>
-        <td align="center">MVI (δ=0.9)</td>
-        <td align="center">Kalman (R=10.0, Q=0.001)</td>
     </tr>
     <tr>
         <td><img src="./images/readme_resources/room_stabilizzato_FPS_cutoff.gif" width="200" /></td>
         <td><img src="./images/readme_resources/room_stabilizzato_FPS_gaussian.gif" width="200" /></td>
+    </tr>
+    <tr>
+        <td align="center">MVI (δ=0.9)</td>
+        <td align="center">Kalman (R=10.0, Q=0.001)</td>
+    </tr>
+    <tr>
         <td><img src="./images/readme_resources/room_stabilizzato_MVI_.gif" width="200" /></td>
         <td><img src="./images/readme_resources/room_stabilizzato_Kalman_.gif" width="200" /></td>
     </tr>
