@@ -61,12 +61,13 @@ def main(video_path, algorithm, smoothing_method):
             output_dir=phase2_output_dir,
             video_name=video_name_base,
             smoothing_method=smoothing_method,
-            cutoff=0.01, # Non usato nel gaussiano
-            sigma=0.018 # Il nostro valore ottimizzato
+            cutoff=0.03, # Non usato nel gaussiano
+            sigma=0.02 # Il nostro valore ottimizzato
         )
         # FPS richiede trimming per evitare uno zoom eccessivo
         trim_config = {"start": 0, "end": 0}
-        print("Trimming (0 frame) abilitato per FPS.")
+        if trim_config["start"] != 0 or trim_config["end"] != 0:
+            print(f"Trimming ({trim_config['start']} / {trim_config['end']} frame) abilitato per FPS.")
 
     elif algorithm == "MVI":
         x_smooth_path = phase2_filters.run_mvi_filter(
@@ -74,7 +75,7 @@ def main(video_path, algorithm, smoothing_method):
             x_act_path=x_act_path, 
             output_dir=phase2_output_dir,
             video_name=video_name_base,
-            delta=0.91 # Damping factor
+            delta=0.90 # Damping factor
         )
         # MVI è real-time, non richiede trimming
         trim_config = {}
@@ -84,7 +85,7 @@ def main(video_path, algorithm, smoothing_method):
             x_act_path=x_act_path,
             output_dir=phase2_output_dir,
             video_name=video_name_base,
-            R_val=10.0, # Rumore dei dati
+            R_val=20.0, # Rumore dei dati
             Q_val=0.001 # Rumore del modello
         )
         # Kalman è real-time, non richiede trimming
@@ -141,13 +142,12 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "--smoothing_method", 
+        "--smoothing_method", "-s",
         type=str, 
         choices=["gaussian", "cutoff"], 
         help="Il metodo di smoothing da utilizzare (solo per FPS)",
         required=False, default=""
     )
-    
     args = parser.parse_args()
     
     main(args.video_path, args.algorithm, args.smoothing_method)

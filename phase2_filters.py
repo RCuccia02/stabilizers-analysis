@@ -130,16 +130,16 @@ def run_fps_filter(x_act_path, output_dir, video_name, smoothing_method, sigma, 
     # Genera grafico
     t_real = np.arange(len(X_act_x))
     _plot_results(t_real, X_act_x, X_lpf_x, X_act_y, X_lpf_y, X_act_theta, X_lpf_theta, 
-                  f"Risultati Filtro FPS ({smoothing_method.upper()})")
+                  f"{video_name} FPS ({smoothing_method.upper()})")
 
     return output_file
 
 def run_mvi_filter(v_act_path, x_act_path, output_dir, video_name, delta=0.9):
     """
-    Implementa il filtro MVI ESATTAMENTE come da slide 11 e 12 [cite: 96-115].
+    Implementa il filtro MVI
     Ritorna il percorso al file X_smooth.
     """
-    print(f"--- Avvio Fase 2: Filtro MVI (Metodo Prof., Delta={delta}) ---")
+    print(f"--- Avvio Fase 2: Filtro MVI (Delta={delta}) ---")
     
     try:
         V_act = np.load(v_act_path)
@@ -176,7 +176,7 @@ def run_mvi_filter(v_act_path, x_act_path, output_dir, video_name, delta=0.9):
     _plot_results(t_real, X_initial[:,0], X_smooth_MVI[:,0], 
                   X_initial[:,1], X_smooth_MVI[:,1], 
                   X_initial[:,2], X_smooth_MVI[:,2], 
-                  f"Risultati Filtro MVI (Delta={delta})")
+                  f"{video_name} MVI (Delta={delta})")
     
     return output_file
 
@@ -228,6 +228,6 @@ def run_kalman_filter(x_act_path, output_dir, video_name, R_val=10.0, Q_val=0.00
     _plot_results(t_real, X_act[:,0], X_smooth_Kalman[:,0], 
                   X_act[:,1], X_smooth_Kalman[:,1], 
                   X_act[:,2], X_smooth_Kalman[:,2], 
-                  f"Risultati Filtro Kalman (R={R_val}, Q={Q_val})")
+                  f"{video_name} Kalman (R={R_val}, Q={Q_val})")
     
     return output_file
