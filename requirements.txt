@@ -1,0 +1,5 @@
+filterpy==1.4.5
+matplotlib==3.10.7
+numpy==2.3.4
+opencv_contrib_python==4.11.0.86
+opencv_python==4.11.0.86
